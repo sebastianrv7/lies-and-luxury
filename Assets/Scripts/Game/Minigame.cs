@@ -1,24 +1,51 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public abstract class Minigame : MonoBehaviour
 {
-    private static UnityEvent onMinigameFinish;
+    public bool IsGameOver {
+        get => isGameOver;
+    }
 
-    private void Start()
+    private bool isGameOver;
+
+    private Minigame _minigame;
+
+    private void Awake(){
+        _minigame = gameObject.GetComponent<Minigame>();
+    }
+
+    private void OnEnable()
     {
-        onMinigameFinish = new();
-        onMinigameFinish.AddListener(OnMinigameFinished);
+        isGameOver = false;
+
+        PrePlay();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
+        while (GetRemainingTime() > 0 && !HasGameOverHappened() && !HasVictoryHappened()){
+            Play();
+        }
+
+        isGameOver = GetRemainingTime() <= 0 | HasGameOverHappened();
+
+        _minigame.enabled = false;
     }
 
-    private void OnMinigameFinished() {
-        
+    private void OnDisable(){
+        PostPlay();
     }
+
+    protected abstract void PrePlay(); // Something before minigame starts
+
+    protected abstract float GetRemainingTime(); // Time remaining
+
+    protected abstract bool HasVictoryHappened(); // Victory condition
+
+    protected abstract bool HasGameOverHappened(); // Game over condition
+    
+    protected abstract void Play(); // Game code
+
+    protected abstract void PostPlay(); // Something after minigame ends
 
 }
