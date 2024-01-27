@@ -2,40 +2,62 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using TMPro;
 
 public class MainScenaryControl : MonoBehaviour
 {
-    
+    public TextMeshProUGUI numberText;
     public int contador = 1;
     public bool estadoDeEmpresa;
-    public float probabilidadEvento = 0.5f;
+    public float probabilidadEstado1 = 100f;
 
-    void start()
+    void Start()
     {
-        float na = Random.value;
-        estadoDeEmpresa = (probabilidadEvento >=0.5);
+        EstadoOutput();
 
-        Debug.Log("Evento activo al inicio"+ estadoDeEmpresa);
-            
     }
 
+    public void EstadoOutput()
+    {
+        bool estado = DeterminarEstado();
+
+        if(estado)
+        {
+            Debug.Log("Subida");
+        }
+        else
+        {
+            Debug.Log("Bajada");
+        }
+    }
+  
+
+  
     public void CambiarEstadoEmpresa(){
-
-
-    }
-
-    
-    public void CambiaTiempo(){
+        contador++;
+        numberText.text = contador + "";
+  
         if(contador <3){
-            contador++;
+            contador = contador + 1;
 
         }else{
             contador =1;
         }
         
-        Debug.Log("Contador: "+ contador);
+        //Debug.Log("Contador: "+ contador);
+
+        EstadoOutput();
+
+        
     }
-  
+
+    private bool DeterminarEstado(){
+        float randomNum = Random.Range (0f, 100f);
+        
+            
+        return randomNum < probabilidadEstado1;
+    }
+   
 
     
 
