@@ -1,5 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
+<<<<<<<< HEAD:Assets/Recourses/PotatoFilterSketch12.png.meta
 guid: bf8671bffbad14e42992eb09e5ef6438
+========
+guid: 4369bbf90c4509842bf6d72e21408d3b
+>>>>>>>> 295c10febdcd220e56e8b808d9b0fb9af5c34074:Assets/Recourses/Hubli Scape2.png.meta
+=======
+guid: 5c121c07606d05a4fa8999a0f13c0c94
+>>>>>>> 295c10febdcd220e56e8b808d9b0fb9af5c34074
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
